@@ -184,6 +184,14 @@ class DropdownTreeSelect extends Component {
     const currentFocusNode = currentFocus && this.treeManager.getNodeById(currentFocus)
     const node = this.treeManager.getNodeById(id)
 
+    if (node._children) {
+      this.onNodeToggle(id)
+      setTimeout(() => {
+        document.getElementById(node._id).checked = false
+      }, 100)
+      return
+    }
+
     if (!tags.length) {
       this.treeManager.restoreDefaultValues()
       tags = this.treeManager.tags
